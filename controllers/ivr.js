@@ -68,8 +68,8 @@ module.exports.selectTeam = function (req, res) {
 	}
 
 	console.log('req.query.Digits', req.query.Digits)
-	if (req.query.Digits || 1) {
-		team = analyzeKeypadInput(req.query.Digits || 1, req.configuration.ivr.options)
+	if (req.query.Digits) {
+		team = analyzeKeypadInput(req.query.Digits, req.configuration.ivr.options)
 	}
 
 	const twiml =  new Twilio.twiml.VoiceResponse()
