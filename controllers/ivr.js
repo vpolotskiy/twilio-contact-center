@@ -61,13 +61,15 @@ module.exports.selectTeam = function (req, res) {
 	let team = null
 
 	/* check if we got a dtmf input or a speech-to-text */
+	console.log('req.query.SpeechResult', req.query.SpeechResult)
 	if (req.query.SpeechResult) {
 		console.log('SpeechResult: ' + req.query.SpeechResult)
 		team = analyzeSpeechInput(req.query.SpeechResult, req.configuration.ivr.options)
 	}
 
-	if (req.query.Digits) {
-		team = analyzeKeypadInput(req.query.Digits, req.configuration.ivr.options)
+	console.log('req.query.Digits', req.query.Digits)
+	if (req.query.Digits || 1) {
+		team = analyzeKeypadInput(req.query.Digits || 1, req.configuration.ivr.options)
 	}
 
 	const twiml =  new Twilio.twiml.VoiceResponse()
