@@ -26,6 +26,7 @@ module.exports.update = function (req, res) {
 		function (callback) {
 
 			module.exports.createOrUpdateApplication(config, req, function (err, application) {
+				console.log('1');
 				if (err) {
 					callback(err)
 				} else {
@@ -36,7 +37,7 @@ module.exports.update = function (req, res) {
 			})
 
 		}, function (config, callback) {
-
+			console.log('2');
 			module.exports.updateMessagingService(req, config, function (err) {
 				if (err) {
 					callback(err)
@@ -46,7 +47,7 @@ module.exports.update = function (req, res) {
 			})
 
 		}, function (config, callback) {
-
+			console.log('3');
 			module.exports.syncQueues(config, function (err) {
 				if (err) {
 					callback(err)
@@ -57,7 +58,7 @@ module.exports.update = function (req, res) {
 
 		}, function (config, callback) {
 			let workflowConfiguration = { task_routing: { filters: [] }}
-
+			console.log('4', config);
 			for (let i = 0; i < config.queues.length; i++) {
 				let target = {
 					targets: [{
@@ -88,7 +89,7 @@ module.exports.update = function (req, res) {
 			})
 
 		}, function (config, callback) {
-
+			console.log('5', config);
 			util.setConfiguration(config, function (err) {
 				if (err) {
 					callback(err)
@@ -100,6 +101,7 @@ module.exports.update = function (req, res) {
 		}
 	], function (err) {
 		if (err) {
+			console.log('err', err);
 			res.status(500).send(res.convertErrorToJSON(err))
 			return
 		}
