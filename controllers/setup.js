@@ -26,7 +26,7 @@ module.exports.update = function (req, res) {
 		function (callback) {
 
 			module.exports.createOrUpdateApplication(config, req, function (err, application) {
-				console.log('1');
+				console.log('1', config);
 				if (err) {
 					callback(err)
 				} else {
@@ -37,7 +37,7 @@ module.exports.update = function (req, res) {
 			})
 
 		}, function (config, callback) {
-			console.log('2');
+			console.log('2', config);
 			module.exports.updateMessagingService(req, config, function (err) {
 				if (err) {
 					callback(err)
@@ -47,7 +47,7 @@ module.exports.update = function (req, res) {
 			})
 
 		}, function (config, callback) {
-			console.log('3');
+			console.log('3', config);
 			module.exports.syncQueues(config, function (err) {
 				if (err) {
 					callback(err)

@@ -28,6 +28,10 @@ module.exports.welcome = function (req, res) {
 	twiml.pause({length: 2})
 	twiml.redirect({method: 'GET'}, 'welcome')
 
+	const result = twiml.toString()
+
+	console.log('ivr/welcome', result)
+
 	res.send(twiml.toString())
 }
 
